@@ -1,5 +1,6 @@
 package edu.touro.las.mcon364.test;
 
+import javax.xml.namespace.QName;
 import java.util.*;
 
 public class StudyTracker {
@@ -25,7 +26,16 @@ public class StudyTracker {
      * Throw IllegalArgumentException if name is null or blank.
      */
     public boolean addLearner(String name) {
-        throw new UnsupportedOperationException();
+        learnerNames().add("Leah");
+        if (scoresByLearner.containsKey(name)) {
+            return true;
+        }
+        if(scoresByLearner.containsKey(null)) {
+            throw new UnsupportedOperationException();
+        }
+        else
+            return false;
+
     }
 
     /**
@@ -42,9 +52,19 @@ public class StudyTracker {
      * This operation should be undoable.
      */
     public boolean addScore(String name, int score) {
-        throw new UnsupportedOperationException();
+        if (score > 100 || score < 0) {
+            throw new IllegalArgumentException();
+        }
+        scoresByLearner.get(name).remove(score);
+        scoresByLearner.get(name).add(score);
+        if (scoresByLearner.get(name).contains(score)) {
+            return true;
+        }
+        if (scoresByLearner.get(name).isEmpty()) {
+            return false;
+        }
+        return false;
     }
-
     /**
      * Problem 13
      * Return the average score for one learner.
@@ -54,6 +74,17 @@ public class StudyTracker {
      * - the learner has no scores
      */
     public Optional<Double> averageFor(String name) {
+        double average = 0;
+        int ctr = 0;
+        if(!scoresByLearner.containsKey(name) || scoresByLearner.get(name).isEmpty()) {
+            return Optional.empty();
+        }
+        for (String learner : learnerNames()) {
+            for(scoresByLearner : scoresFor(learner)) {
+                average += scoresByLearner.get(learner).stream().mapToDouble(s -> s).sum();
+                ctr++;
+            }
+        }
         throw new UnsupportedOperationException();
     }
 
@@ -70,6 +101,15 @@ public class StudyTracker {
      * Return Optional.empty() when no average exists.
      */
     public Optional<String> letterBandFor(String name) {
+        Optional<Double> average = averageFor(name);
+
+        String letterGrade = switch (average) {
+            case 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100 -> "A";
+            case 80, 81, 82, 83, 84, 85, 86, 87, 88, 89 -> 'B';
+            case 70, 71, 72, 73, 74, 75, 76, 77, 78, 79 -> "C";
+            case 60, 61, 62, 63, 64, 65, 66, 67, 68, 69 -> "D";
+            default -> "F"
+        };
         throw new UnsupportedOperationException();
     }
 
@@ -81,7 +121,12 @@ public class StudyTracker {
      * Return false if there is nothing to undo.
      */
     public boolean undoLastChange() {
-        throw new UnsupportedOperationException();
+        if (!undoStack.isEmpty()) {
+            return true;
+        }
+        else
+            return false;
+
     }
 
 

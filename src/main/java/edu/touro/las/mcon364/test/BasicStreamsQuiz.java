@@ -1,6 +1,7 @@
 package edu.touro.las.mcon364.test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class BasicStreamsQuiz {
 
@@ -19,6 +20,8 @@ public class BasicStreamsQuiz {
      * Return all course names sorted alphabetically.
      */
     public List<String> getSortedCourseNames() {
+      Map<String, List<Integer>> scoresByCourse;
+      return scoresByCourse.containsKey().stream.filter();
         throw new UnsupportedOperationException();
     }
 
@@ -27,6 +30,9 @@ public class BasicStreamsQuiz {
      * Across all courses, count how many scores are greater than or equal to threshold.
      */
     public long countScoresAtLeast(int threshold) {
+        Object BasicStreamsQuiz;
+        Map<String, List<Integer>> scoresByCourse = new Map<>(BasicStreamsQuiz);
+        for(int i=0; i<scoresByCourse.size(); i++){}
         throw new UnsupportedOperationException();
     }
 
@@ -45,7 +51,7 @@ public class BasicStreamsQuiz {
      * Use streams.
      */
     public List<Integer> squareAll(List<Integer> numbers) {
-        throw new UnsupportedOperationException();
+        numbers.stream().filter(n -> numbers * numbers).collect(Collectors.toList(numbers);
     }
 
     /**
@@ -56,6 +62,9 @@ public class BasicStreamsQuiz {
      * Return 0.0 if there are no passing scores.
      */
     public double averagePassingScore() {
-        throw new UnsupportedOperationException();
+        if(scoresByCourse.get(scoresByCourse.keySet().stream().findFirst().get()).size() > 65)
+            List<String>passing = new ArrayList<>();
+        passing.add(scoresByCourse.get(score));
+        }
     }
 }
